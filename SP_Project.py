@@ -2,7 +2,7 @@
 
 #basic arithmetic operations
 import operator
-# standard trignometric functions
+# standard trigonometric functions
 import math
 import sys
 
@@ -62,7 +62,7 @@ class Memory:
         # But store the formatted version in history for display
         formatted_result = format_output(result)
         self.history.append(f"{expr} = {formatted_result}")
-        if len(self.history) > 5: # sets histroy lenght shows last 5 calculations
+        if len(self.history) > 5: # sets history length shows last 5 calculations
             self.history.pop(0) #removes and returns items from list
     
     def show_history(self):
@@ -253,7 +253,7 @@ def toggle_unit():
             print(ANSI.color_text(31) + "Invalid input! Please enter 'd' for degrees or 'r' for radians." + ANSI.color_text(0))
 
 
-# trignometric menu
+# trigonometric menu
 def trigno_menu():
     toggle_unit()
     
@@ -488,3 +488,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(ANSI.color_text(35) + "\n\nProgram interrupted by user. Exiting..." + ANSI.color_text(0))
         sys.exit()
+
