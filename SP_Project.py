@@ -195,7 +195,7 @@ def arithmetic_menu():
         break  # exit the loop after successful operation
 #-----------------------------------------------------------------------
 
-unit = "radians"  # initialize unit as radians
+unit = "degrees"  # initialize unit as degrees
 
 # converts degrees to radians
 def to_radians(deg):
@@ -203,39 +203,27 @@ def to_radians(deg):
 
 # sine
 def sin(num):
-    if unit == "degrees":
-        num = to_radians(num)
-    return math.sin(num)
+    return math.sin(to_radians(num))
 
 # cosine
 def cos(num):
-    if unit == "degrees":
-        num = to_radians(num)
-    return math.cos(num)
+    return math.cos(to_radians(num))
 
 # tangent
 def tan(num):
-    if unit == "degrees":
-        num = to_radians(num)
-    return math.tan(num)
+    return math.tan(to_radians(num))
 
 # cotangent
 def cot(num):
-    if unit == "degrees":
-        num = to_radians(num)
-    return 1 / math.tan(num)
+    return 1 / math.tan(to_radians(num))
 
 # cosecant
 def cosec(num):
-    if unit == "degrees":
-        num = to_radians(num)
-    return 1 / math.sin(num)
+    return 1 / math.sin(to_radians(num))
 
 # secant
 def sec(num):
-    if unit == "degrees":
-        num = to_radians(num)
-    return 1 / math.cos(num)
+    return 1 / math.cos(to_radians(num))
 
 # toggles between degrees & radians
 def toggle_unit():
@@ -515,4 +503,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(ANSI.color_text(35) + "\n\nProgram interrupted by user. Exiting..." + ANSI.color_text(0))
         sys.exit()
+
 
