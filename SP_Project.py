@@ -322,8 +322,9 @@ def trigno_menu():
 #--- Unit Conversions ---
 def convert_units(value, from_unit, to_unit):
     try:
+        # to convert input string to float
         value = float(value)
-	# integrating ValueError handling
+    # instead of crashing with a "ValueError" traceback, we return a readable error string
     except ValueError:
         return ANSI.color_text(31) + "Error: Value must be a number" + ANSI.color_text(0)
     
@@ -489,5 +490,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(ANSI.color_text(35) + "\n\nProgram interrupted by user. Exiting..." + ANSI.color_text(0))
         sys.exit()
+
 
 
