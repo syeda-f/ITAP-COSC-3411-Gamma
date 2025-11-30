@@ -1,6 +1,6 @@
 # ITAP-COSC-3411-Gamma
 Integrated Command Line Python Calculator
-- A menu-driven command-line calculator written in Python. This tool integrates basic arithmetic, trignometric functions, unit conversions, and number system conversions into a single, colour-coded interface with history tracking.
+A menu-driven command-line calculator written in Python. This tool integrates basic arithmetic, trignometric functions, unit conversions, and number system conversions into a single, colour-coded interface with history tracking.
 
 ## Features
 - **Arithmetic Operations**: Addition, subtraction, multipulication, division, modulus, exponentiation, and floor division.
