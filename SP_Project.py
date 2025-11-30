@@ -12,7 +12,7 @@ class ANSI():
         def color_text(code):
         	return "\33[{code}m".format(code=code)
         #providing ANSI color code will color the required text
-        #0 is reset or no color, 31 is red, 32 is green, 34 is blue 
+        #0 is reset or no color, 31 is red, 32 is green, 35 is purple 
 
 #--- Math Execution and Formatting ---
 
@@ -515,3 +515,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(ANSI.color_text(35) + "\n\nProgram interrupted by user. Exiting..." + ANSI.color_text(0))
         sys.exit()
+
