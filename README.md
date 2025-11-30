@@ -15,7 +15,7 @@ A menu-driven command-line calculator written in Python. This tool integrates ba
 - **Colour-Coded Output**: Uses ANSI escape codes for clear, coloured terminal output (Red for errors, Green for results)
 
 ## Prerequisites
-Python 3.x myst be installed on your system
+Python 3.x must be installed on your system
 - To check if Python is installed, open your terminal/command prompt and type `python --version` or `python3 --version`
 
 ## Installation & Configuration
