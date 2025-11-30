@@ -61,3 +61,5 @@ Here is a short example of calculating the hypotenuse of a triangle using the `a
 3. Enter number 2: `0.5`
 4. Select operation **6** (Exponential)
      - Result: `25.0^0.5 = 5.0`
+
+_Portions of the code logic and documentation for this project were generated with the assistance of [Google Gemini](gemini.google.com)_
