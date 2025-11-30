@@ -63,7 +63,8 @@ class Memory:
         self.history.append(f"{expr} = {formatted_result}")
         if len(self.history) > 5: # sets histroy lenght shows last 5 calculations
             self.history.pop(0) #removes and returns items from list
-    
+			
+     # Display calculation history and current Ans value
     def show_history(self):
         print(ANSI.color_text(35) + "\n" + "="*40)
         print("CALCULATION HISTORY")
@@ -490,6 +491,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(ANSI.color_text(35) + "\n\nProgram interrupted by user. Exiting..." + ANSI.color_text(0))
         sys.exit()
+
 
 
 
