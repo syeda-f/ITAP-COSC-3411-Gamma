@@ -29,11 +29,6 @@ Open your terminal or command prompt, navigate to the folder containing the file
 
 - **Windows** -> `python SP_Project.py`
 - **Linux/macOS** -> `python3 SP_Project.py` or `./SP_Project.py`
-  
-## Modules 
-´math´: Standard trigonometric functions
-´operator´: Basic arithmetic operations
-´sys´: System functions for program control
 
 ## Usage Guide
 1. Navigation: The program uses a numbered menu system. Enter the number corresponding to the option you want (for example, `1` for Arithmetic)
