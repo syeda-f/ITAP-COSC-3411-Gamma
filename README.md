@@ -61,5 +61,7 @@ Here is a short example of calculating the hypotenuse of a triangle using the `a
 3. Enter number 2: `0.5`
 4. Select operation **6** (Exponential)
      - Result: `25.0^0.5 = 5.0`
-
-_Portions of the code logic and documentation for this project were generated with the assistance of [Google Gemini](gemini.google.com)_
+## References
+1. [Google Gemini](gemini.google.com) : used to generate portions of the code logic and documentation for this project
+2. [Geeks for Geeks](https://www.geeksforgeeks.org/python/how-to-add-colour-to-text-python/) : used to understand and employ the use of the ANSI class
+3. [w3schools](https://www.w3schools.com/python/ref_string_format.asp) : used to comprehend and apply the knowledge of format() method and number system conversions
