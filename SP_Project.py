@@ -391,6 +391,36 @@ def handle_conversion_command():
             print(ANSI.color_text(31) + "Error: Use format '[value] [from_unit] to [to_unit]'" + ANSI.color_text(0))
 
 #--- Number System Conversions ---
+def convert_numsys(value, from_unit, to_unit):
+    value = str(value)
+    
+    if from_unit == "bin" and not all(char in '01' for char in value):
+        print(ANSI.color_text(31) + "Error: Binary numbers can only have 0s and 1s! " + ANSI.color_text(0))
+        return
+    if from_unit == "oct" and not all(char in '01234567' for char in value):
+        print(ANSI.color_text(31) + "Error: Octal numbers can only have 0,1,2,3,4,5,6,7!" + ANSI.color_text(0))
+        return
+    if from_unit == "dec" and not all(char in '0123456789' for char in value):
+        print(ANSI.color_text(31) + "Error: Hexadecimal numbers can only have 0,1,2,3,4,5,6,7,8,9! " + ANSI.color_text(0))
+        return
+        
+    if from_unit == to_unit:
+        return int(value)
+    elif from_unit == "bin" and to_unit == "dec":
+        return int(value, 2)
+    elif from_unit == "bin" and to_unit == "oct":
+        return int(format(int(value, 2), 'o'))   #bin to dec to oct
+    elif from_unit == "dec" and to_unit == "bin":
+        return int(format(int(value), 'b'))  
+    elif from_unit == "dec" and to_unit == "oct":
+        return int(format(int(value), 'o'))
+    elif from_unit == "oct" and to_unit == "bin":
+        return int(format(int(value, 8), 'b'))  #oct to dec to bin
+    elif from_unit == "oct" and to_unit == "dec":
+        return int(value, 8)    
+    else:
+        return ANSI.color_text(31) + "Error: Unknown conversion" + ANSI.color_text(0)
+		
 def numsys_conversion_command():
     print(ANSI.color_text(35) + "\n--- Number System Conversion ---" + ANSI.color_text(0))
     print("Format: [value] [from_unit] to [to_unit]")
@@ -404,7 +434,6 @@ def numsys_conversion_command():
             return
         parts = cmd.split()
         
-        # check format inside the loop
         if len(parts) == 4 and parts[2] == "to":
             value = parts[0]
             from_unit = parts[1]
@@ -414,16 +443,11 @@ def numsys_conversion_command():
             formatted_result = format_output(result)
             print(f"{ANSI.color_text(32)} {value} {from_unit} = {formatted_result} {to_unit} {ANSI.color_text(0)}")
             
-            # add to history
             expression = f"Convert {value} {from_unit} to {to_unit}"
             if not isinstance(result, str) or not result.startswith("Error"):
                 memory.add_calc(expression, result)
-            
-            # break to return to the main menu after one success
-            # could be removed to allow for multiple conversions
             break 
         else:
-            # printing error if format is wrong, then loop continues to ask again
             print(ANSI.color_text(31) + "Error: Use format '[value] [from_unit] to [to_unit]'" + ANSI.color_text(0))
         
 def showhelp():
@@ -491,7 +515,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(ANSI.color_text(35) + "\n\nProgram interrupted by user. Exiting..." + ANSI.color_text(0))
         sys.exit()
-
-
-
-
