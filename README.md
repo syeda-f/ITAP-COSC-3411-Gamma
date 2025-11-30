@@ -38,6 +38,38 @@ Open your terminal or command prompt, navigate to the folder containing the file
      - To return to the main menu for sub-menus (like conversios), type `101` or `back` as indicated by the prompt
 3. Exiting: Select option `7` from the main menu or press `Ctrl+C` to force quit safely.
 
+**Examples**
+1. Arithmetic Operations
+    Enter number 1 or ans: 10
+    Enter number 2 or ans: 5
+    Select operation:
+    1. Add
+    2. Subtract
+    3. Multiply
+    4. Divide
+    5. Modulus
+    6. Exponentiation
+    7. Floor Division
+
+    Enter (1-7) or ('101' to return to main menu): 1
+    10 + 5 = 15
+
+2. Trigonometric Functions
+    Enter unit, degrees/radians (d/r): d
+    Current unit chosen is: degrees
+
+    Enter value (or 'ans' for previous result): 0
+    Select trigonometric function:
+    1. sin
+    2. cos
+    3. tan
+    4. cot
+    5. cosec
+    6. sec
+    Enter (1-6): 2
+     cos (0) = 1 
+
+
 ## Example Workflow
 Here is a short example of calculating the hypotenuse of a triangle using the `ans` feature:
 
