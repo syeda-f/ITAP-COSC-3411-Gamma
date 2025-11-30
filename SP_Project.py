@@ -49,20 +49,19 @@ def safe_execute(func, *args):
         return f"Error: {str(e)}"
         
 #-----History--------
-
 class Memory:
     def __init__(self):
         self.ans = 0
         self.history = []
     
     def add_calc(self, expr, result):
-        # Store the numeric result, not the formatted string
+        # store the numeric result, not the formatted string
         if isinstance(result, (int, float)):
             self.ans = result
-        # But store the formatted version in history for display
+        # but store the formatted version in history for display
         formatted_result = format_output(result)
         self.history.append(f"{expr} = {formatted_result}")
-        if len(self.history) > 5: # sets history length shows last 5 calculations
+        if len(self.history) > 5: # sets histroy lenght shows last 5 calculations
             self.history.pop(0) #removes and returns items from list
     
     def show_history(self):
@@ -87,6 +86,7 @@ def get_number(prompt):
             if value.lower() == 'ans':
                 return memory.ans
             return float(value)
+		# integrating ValueError handling
         except ValueError:
             print(ANSI.color_text(31) + "Invalid input! Enter a number or 'ans'" + ANSI.color_text(0))
 
@@ -126,6 +126,7 @@ def arithmetic_menu():
     try:
         n1 = get_number("Enter number 1 or ans: ")
         n2 = get_number("Enter number 2 or ans: ")
+	# integrating ValueError handling
     except ValueError:
         print(ANSI.color_text(31) + "Error: Please enter valid numbers." + ANSI.color_text(0))
         return
@@ -176,9 +177,9 @@ def arithmetic_menu():
             result = safe_execute(floor_div, n1, n2)
         else:
             print(ANSI.color_text(31) + "Invalid option chosen! Please enter a number between 1-7." + ANSI.color_text(0))
-            continue  # Go back to the start of the loop
+            continue  # go back to the start of the loop
         
-        # Format for display only
+        # format for display only
         formatted_n1 = format_output(n1)
         formatted_n2 = format_output(n2)
         formatted_res = format_output(result)
@@ -188,9 +189,9 @@ def arithmetic_menu():
         # ADD TO HISTORY - only if result is not an error
         expression = f"{formatted_n1} {symbol} {formatted_n2}"
         if not isinstance(result, str) or not result.startswith("Error"):
-            memory.add_calc(expression, result)  # Pass the ACTUAL result, not formatted
+            memory.add_calc(expression, result)  # pass the ACTUAL result, not formatted
         
-        break  # Exit the loop after successful operation
+        break  # exit the loop after successful operation
 #-----------------------------------------------------------------------
 
 unit = "radians"  # initialize unit as radians
@@ -320,7 +321,11 @@ def trigno_menu():
         
 #--- Unit Conversions ---
 def convert_units(value, from_unit, to_unit):
-    value = float(value)
+    try:
+        value = float(value)
+	# integrating ValueError handling
+    except ValueError:
+        return ANSI.color_text(31) + "Error: Value must be a number" + ANSI.color_text(0)
     
     if from_unit == to_unit:
         return value
@@ -359,50 +364,31 @@ def handle_conversion_command():
             value = parts[0]
             from_unit = parts[1]
             to_unit = parts[3]
+
+			# integrating ValueError handling
+            try:
+                # converting to float to check if it's a valid number
+                float(value) 
+                
+                # proceeding with conversion if successful
+                result = convert_units(value, from_unit, to_unit)
+                formatted_result = format_output(result)
+                print(f"{ANSI.color_text(32)} {value} {from_unit} = {formatted_result} {to_unit} {ANSI.color_text(0)}")
+                
+                # adding to history
+                expression = f"Convert {value} {from_unit} to {to_unit}"
+                if not isinstance(result, str) or not result.startswith("Error"):
+                    memory.add_calc(expression, result)
+                break
             
-            result = convert_units(value, from_unit, to_unit)
-            formatted_result = format_output(result)
-            print(f"{ANSI.color_text(32)} {value} {from_unit} = {formatted_result} {to_unit} {ANSI.color_text(0)}")
+            except ValueError:
+                # catching the crash if 'value' is not a number
+                print(ANSI.color_text(31) + "Error: The first part must be a valid number." + ANSI.color_text(0))
             
-            # Add to history
-            expression = f"Convert {value} {from_unit} to {to_unit}"
-            if not isinstance(result, str) or not result.startswith("Error"):
-                memory.add_calc(expression, result)
-            break
         else:
             print(ANSI.color_text(31) + "Error: Use format '[value] [from_unit] to [to_unit]'" + ANSI.color_text(0))
 
 #--- Number System Conversions ---
-def convert_numsys(value, from_unit, to_unit):
-    value = str(value)
-    
-    if from_unit == "bin" and not all(char in '01' for char in value):
-        print(ANSI.color_text(31) + "Error: Binary numbers can only have 0s and 1s! " + ANSI.color_text(0))
-        return
-    if from_unit == "oct" and not all(char in '01234567' for char in value):
-        print(ANSI.color_text(31) + "Error: Octal numbers can only have 0,1,2,3,4,5,6,7!" + ANSI.color_text(0))
-        return
-    if from_unit == "dec" and not all(char in '0123456789' for char in value):
-        print(ANSI.color_text(31) + "Error: Binary numbers can only have 0,1,2,3,4,5,6,7,8,9! " + ANSI.color_text(0))
-        return
-        
-    if from_unit == to_unit:
-        return int(value)
-    elif from_unit == "bin" and to_unit == "dec":
-        return int(value, 2)
-    elif from_unit == "bin" and to_unit == "oct":
-        return int(format(int(value, 2), 'o'))   #bin to dec to oct
-    elif from_unit == "dec" and to_unit == "bin":
-        return int(format(int(value), 'b'))  
-    elif from_unit == "dec" and to_unit == "oct":
-        return int(format(int(value), 'o'))
-    elif from_unit == "oct" and to_unit == "bin":
-        return int(format(int(value, 8), 'b'))  #oct to dec to bin
-    elif from_unit == "oct" and to_unit == "dec":
-        return int(value, 8)    
-    else:
-        return ANSI.color_text(31) + "Error: Unknown conversion" + ANSI.color_text(0)
-
 def numsys_conversion_command():
     print(ANSI.color_text(35) + "\n--- Number System Conversion ---" + ANSI.color_text(0))
     print("Format: [value] [from_unit] to [to_unit]")
@@ -416,6 +402,7 @@ def numsys_conversion_command():
             return
         parts = cmd.split()
         
+        # check format inside the loop
         if len(parts) == 4 and parts[2] == "to":
             value = parts[0]
             from_unit = parts[1]
@@ -425,12 +412,16 @@ def numsys_conversion_command():
             formatted_result = format_output(result)
             print(f"{ANSI.color_text(32)} {value} {from_unit} = {formatted_result} {to_unit} {ANSI.color_text(0)}")
             
-            # Add to history
+            # add to history
             expression = f"Convert {value} {from_unit} to {to_unit}"
             if not isinstance(result, str) or not result.startswith("Error"):
                 memory.add_calc(expression, result)
-            break
+            
+            # break to return to the main menu after one success
+            # could be removed to allow for multiple conversions
+            break 
         else:
+            # printing error if format is wrong, then loop continues to ask again
             print(ANSI.color_text(31) + "Error: Use format '[value] [from_unit] to [to_unit]'" + ANSI.color_text(0))
         
 def showhelp():
@@ -453,34 +444,44 @@ def main():
     print("---------------------------------------------" + ANSI.color_text(0))
     
     while True:
-        print(ANSI.color_text(35) + "\n--- Main Menu ---"+ ANSI.color_text(0))
-        print("1. Arithmetic Operations")
-        print("2. Trigonometric Operations")
-        print("3. Unit Conversions")
-        print("4. Number System Conversions")
-        print("5. Show History")
-        print("6. Show Help")
-        print("7. Exit Program")
+        try:
+            print(ANSI.color_text(35) + "\n--- Main Menu ---"+ ANSI.color_text(0))
+            print("1. Arithmetic Operations")
+            print("2. Trigonometric Operations")
+            print("3. Unit Conversions")
+            print("4. Number System Conversions")
+            print("5. Show History")
+            print("6. Show Help")
+            print("7. Exit Program")
+            
+            choice = input("\nSelect an option (1-7): ").strip()
+            
+            if choice == '1':
+                arithmetic_menu()
+            elif choice == '2':
+                trigno_menu()
+            elif choice == '3':
+                handle_conversion_command()
+            elif choice == '4':
+                numsys_conversion_command()
+            elif choice == '5':
+                memory.show_history()
+            elif choice == '6':
+                showhelp()
+            elif choice == '7':
+                print(ANSI.color_text(35) + "\nExiting calculator. Goodbye!" + ANSI.color_text(0))
+                sys.exit()
+            else:
+                print(ANSI.color_text(31) + "\n[!] Invalid selection. Please choose options 1 to 7" + ANSI.color_text(0))
         
-        choice = input("\nSelect an option (1-7): ").strip()
-        
-        if choice == '1':
-            arithmetic_menu()
-        elif choice == '2':
-            trigno_menu()
-        elif choice == '3':
-            handle_conversion_command()
-        elif choice == '4':
-            numsys_conversion_command()
-        elif choice == '5':
-            memory.show_history()
-        elif choice == '6':
-            showhelp()
-        elif choice == '7':
-            print(ANSI.color_text(35) + "\nExiting calculator. Goodbye!" + ANSI.color_text(0))
+        except KeyboardInterrupt:
+            # handles Ctrl+C 
+            print(ANSI.color_text(35) + "\n\nProgram interrupted by user. Exiting..." + ANSI.color_text(0))
             sys.exit()
-        else:
-            print(ANSI.color_text(31) + "\n[!] Invalid selection. Please choose options 1 to 7" + ANSI.color_text(0))
+        except EOFError:
+             # handles Ctrl+D (end of file)
+            print(ANSI.color_text(35) + "\n\nExiting..." + ANSI.color_text(0))
+            sys.exit()
 
 if __name__ == "__main__":
     try:
@@ -488,4 +489,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(ANSI.color_text(35) + "\n\nProgram interrupted by user. Exiting..." + ANSI.color_text(0))
         sys.exit()
+
 
