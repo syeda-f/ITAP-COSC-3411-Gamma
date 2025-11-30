@@ -24,7 +24,7 @@ Python 3.x must be installed on your system
 3. Permissions (Linux/macOS): If you wish to run the script directly as an executable, you may need to grant execution permissions:
                                   `chmod +x SP_ Project.py`
 
-# How to Run
+## How to Run
 Open your terminal or command prompt, navigate to the folder containing the file, and run one of the following commands:
 
 - **Windows** -> `python SP_Project.py`
