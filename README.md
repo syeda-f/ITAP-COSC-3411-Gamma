@@ -1,13 +1,13 @@
 # ITAP-COSC-3411-Gamma
 ## Integrated Command Line Python Calculator
 
-A menu-driven command-line calculator written in Python. This tool integrates basic arithmetic, trignometric functions, unit conversions, and number system conversions into a single, colour-coded interface with history tracking.
+A menu-driven command-line calculator written in Python. This tool integrates basic arithmetic, trigonometric functions, unit conversions, and number system conversions into a single, colour-coded interface with history tracking.
 
 ## Features
-- **Arithmetic Operations**: Addition, subtraction, multipulication, division, modulus, exponentiation, and floor division.
-- **Trignometry**: Supports sin, cos, tan, cot, cosec, and sec. Includes a toggle for **Degrees** and **Radians**
-- **Unit Conversion**: Convert between Temperature (Celcius/Fahrenheit), Length (km/miles, m/ft), and Weight (kg/lb)
-- **Number Systems**: Convert between Deciman, Binary, and Octal
+- **Arithmetic Operations**: Addition, subtraction, multiplication, division, modulus, exponentiation, and floor division.
+- **Trigonometry**: Supports sin, cos, tan, cot, cosec, and sec. Includes a toggle for **Degrees** and **Radians**
+- **Unit Conversion**: Convert between Temperature (Celsius/Fahrenheit), Length (km/miles, m/ft), and Weight (kg/lb)
+- **Number Systems**: Convert between Decimal, Binary, and Octal
 - **Smart History & Memory**:
     Tracks the last 5 calculations
     Use the keyword `ans` to use the result of the previous calculation in a new equation
@@ -34,41 +34,44 @@ Open your terminal or command prompt, navigate to the folder containing the file
 1. Navigation: The program uses a numbered menu system. Enter the number corresponding to the option you want (for example, `1` for Arithmetic)
 2. Inputs: Follow the on-screen prompts
      - for numbers, type the value (e.g., 50, 3.14)
-     - To use previous result, type `ans`
-     - To return to the main menu for sub-menus (like conversios), type `101` or `back` as indicated by the prompt
+     - To use the previous result, type `ans`
+     - To return to the main menu for sub-menus (like conversions), type `101` or `back` as indicated by the prompt
 3. Exiting: Select option `7` from the main menu or press `Ctrl+C` to force quit safely.
 
 **Examples**
 1. Arithmetic Operations
-Enter number 1 or ans: 10
-Enter number 2 or ans: 5
-Select operation:
-1. Add
-2. Subtract
-3. Multiply
-4. Divide
-5. Modulus
-6. Exponentiation
-7. Floor Division
+```
+    Enter number 1 or ans: 10
+    Enter number 2 or ans: 5
+    Select operation:
+    1. Add
+    2. Subtract
+    3. Multiply
+    4. Divide
+    5. Modulus
+    6. Exponentiation
+    7. Floor Division
 
-Enter (1-7) or ('101' to return to main menu): 1
-10 + 5 = 15
+    Enter (1-7) or ('101' to return to main menu): 1
+    10 + 5 = 15
+```
 
 2. Trigonometric Functions
-Enter unit, degrees/radians (d/r): d
-Current unit chosen is: degrees
+```
+    Enter unit, degrees/radians (d/r): d
+    Current unit chosen is: degrees
 
-Enter value (or 'ans' for previous result): 0
-Select trigonometric function:
-1. sin
-2. cos
-3. tan
-4. cot
-5. cosec
-6. sec
-Enter (1-6): 2
- cos (0) = 1 
-
+    Enter value (or 'ans' for previous result): 0
+    Select trigonometric function:
+    1. sin
+    2. cos
+    3. tan
+    4. cot
+    5. cosec
+    6. sec
+    Enter (1-6): 2
+     cos (0) = 1 
+```
 
 ## Example Workflow
 Here is a short example of calculating the hypotenuse of a triangle using the `ans` feature:
